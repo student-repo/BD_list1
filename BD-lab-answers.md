@@ -67,6 +67,10 @@ or select orders.CustomerID, group_concat(ProductName separator '\n'), foo from 
     foo7.SupplierID=suppliers.SupplierID where suppliers.Country = 'USA');
 
 
+    much better:
+    update products set UnitPrice=UnitPrice+2 where products.SupplierID in (select SupplierID from suppliers where Country="USA");
+
+
 19) update products inner join (select ProductID, sum(Quantity) as total from order_details group by ProductID) as t on
 products.ProductID=t.ProductID set products.TotalSales=t.total;
 
